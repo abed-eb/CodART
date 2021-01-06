@@ -19,7 +19,7 @@ from refactorings.extract_class import ExtractClassRefactoringListener
 from gen.java9 import Java9_v2Lexer
 from gen.java9.Java9_v2Parser import Java9_v2Parser
 
-from java9speedy.parser import sa_java9_v2
+from speedy.src.java9speedy.parser import sa_java9_v2
 
 
 def main(args):
@@ -37,12 +37,12 @@ def main(args):
 
     # Step 5: Create parse tree
     # 1. Python backend --> Low speed
-    # parse_tree = parser.compilationUnit()
+    parse_tree = parser.compilationUnit()
 
     # 2. C++ backend --> high speed
 
-    parse_tree = sa_java9_v2.parse(stream, 'compilationUnit', None)
-    quit()
+    # parse_tree = sa_java9_v2.parse(stream, 'compilationUnit', None)
+    # quit()
     # Step 6: Create an instance of AssignmentStListener
     my_listener = ExtractClassRefactoringListener(common_token_stream=token_stream, class_identifier='Worker')
 
