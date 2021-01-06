@@ -16,7 +16,7 @@ import argparse
 from antlr4 import *
 
 # from refactorings.extract_class_migrated import ExtractClassRefactoringListener
-from refactorings.extract_class_migrated import ExtractClassRefactoringListener
+from refactorings.merge_package import MergePackageRecognizerListener
 from gen.java.JavaLexer import JavaLexer
 from gen.java.JavaParser import JavaParser
 
@@ -27,22 +27,21 @@ def main(args):
     token_stream = CommonTokenStream(lexer)
     parser = JavaParser(token_stream)
     tree = parser.compilationUnit()
-    my_listener = ExtractClassRefactoringListener(
-        common_token_stream=token_stream, source_class='A', new_class='A_New',
-        moved_fields=['h'], moved_methods=['printH']
+    my_listener = MergePackageRecognizerListener(
+        common_token_stream=token_stream, p1 = input("Enter first pack: ")  , p2 = input("Enter second pack: ")
     )
 
     walker = ParseTreeWalker()
     walker.walk(t=tree, listener=my_listener)
 
-    with open('input.refactored.java', mode='w', newline='') as f:
-        f.write(my_listener.token_stream_rewriter.getDefaultText())
+    # with open('input.refactored.java', mode='w', newline='') as f:
+    #     f.write(my_listener.token_stream_rewriter.getDefaultText())
 
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser()
     argparser.add_argument(
         '-n', '--file',
-        help='Input source', default=r'./input.java')
+        help='Input source', default=r'./input2.java')
     args = argparser.parse_args()
     main(args)
