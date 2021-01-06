@@ -16,7 +16,7 @@ import argparse
 from antlr4 import *
 
 # from refactorings.extract_class_migrated import ExtractClassRefactoringListener
-from refactorings.extract_class_new import ExtractClassRefactoringListener
+from refactorings.extract_class_migrated import ExtractClassRefactoringListener
 from gen.java.JavaLexer import JavaLexer
 from gen.java.JavaParser import JavaParser
 
