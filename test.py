@@ -28,7 +28,7 @@ def main(args):
     parser = JavaParser(token_stream)
     tree = parser.compilationUnit()
     my_listener = MergePackageRecognizerListener(
-        common_token_stream=token_stream, p1 = input("Enter first pack: ")  , p2 = input("Enter second pack: ")
+        common_token_stream=token_stream, p1 = 'p1'  , p2 = 'p2'
     )
 
     walker = ParseTreeWalker()

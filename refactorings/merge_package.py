@@ -19,29 +19,39 @@ class MergePackageRecognizerListener(JavaParserLabeledListener):
     a stream of tokens is sent to the listener, to build an object token_stream_rewriter
     field addresses the field of the class, tobe encapsulated.
     """
+
+    # recursively merge two folders including subfolders
+
     def enterPackageDeclaration(self, ctx:JavaParserLabeled.PackageDeclarationContext):
-        package_name = ctx.qualifiedName().IDENTIFIER().getText()
+        package_name = ctx.getText().split("package")[1].replace(';', '')
         if package_name == self.p1 or package_name == self.p2 :
-            self.token_stream_rewriter.replaceRange(from_idx= ctx.qualifiedName().IDENTIFIER().getText().start.tokenIndex,
-                                                    to_idx= ctx.qualifiedName().IDENTIFIER().getText().stop.tokenIndex,
+            self.token_stream_rewriter.replaceRange(from_idx= ctx.start.tokenIndex,
+                                                    to_idx= ctx.stop.tokenIndex,
                                                     text=self.p3)
+            # x = self.token_stream_rewriter.getText(start= ctx.start.tokenIndex,
+            #                                         stop= ctx.stop.tokenIndex,
+            #                                         program_name=self.token_stream_rewriter.DEFAULT_PROGRAM_NAME)
+            print(package_name)
 
     def enterImportDeclaration(self, ctx:JavaParserLabeled.ImportDeclarationContext):
-        import_name = ctx.qualifiedName().IDENTIFIER().getText()
+        import_name = ctx.getText().split("import")[1].replace(';', '')
         if import_name == 'p1' or import_name == 'p2' :
-            self.token_stream_rewriter.replaceRange(from_idx= ctx.qualifiedName().IDENTIFIER().getText().start.tokenIndex,
-                                                    to_idx= ctx.qualifiedName().IDENTIFIER().getText().stop.tokenIndex,
-                                                    text='p3')
+            self.token_stream_rewriter.replaceRange(from_idx= ctx.start.tokenIndex,
+                                                    to_idx= ctx.stop.tokenIndex,
+                                                    text= 'p3')
+            print(import_name)
+
 
     def __init__(self, common_token_stream: CommonTokenStream = None,
                  p1 : str = None,
-                 p2 : str = None):
+                 p2 : str = None,):
         """
         :param common_token_stream:
         """
         self.token_stream = common_token_stream
         self.p1 = p1
         self.p2 = p2
+        self.p3 = None
         # Move all the tokens in the source code in a buffer, token_stream_rewriter.
         if common_token_stream is not None:
             self.token_stream_rewriter = TokenStreamRewriter(common_token_stream)
