@@ -1,4 +1,5 @@
 /* Before refactoring (Original version) */
+package p2;
 class A
 {
     public int f; /* printF , printF, */

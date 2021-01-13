@@ -28,20 +28,20 @@ def main(args):
     parser = JavaParser(token_stream)
     tree = parser.compilationUnit()
     my_listener = MergePackageRecognizerListener(
-        common_token_stream=token_stream, p1 = 'p1'  , p2 = 'p2'
+        common_token_stream=token_stream, p1 = r'./input2.java'  , p2 = r'./input.java'
     )
 
     walker = ParseTreeWalker()
     walker.walk(t=tree, listener=my_listener)
 
-    # with open('input.refactored.java', mode='w', newline='') as f:
-    #     f.write(my_listener.token_stream_rewriter.getDefaultText())
+    with open('input.refactored.java', mode='w', newline='') as f:
+        f.write(my_listener.token_stream_rewriter.getDefaultText())
 
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser()
     argparser.add_argument(
         '-n', '--file',
-        help='Input source', default=r'./input2.java')
+        help='Input source', default=r'input.java')
     args = argparser.parse_args()
     main(args)
