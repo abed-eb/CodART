@@ -22,13 +22,14 @@ from gen.java.JavaParser import JavaParser
 
 
 def main(args):
+
     stream = FileStream(args.file, encoding='utf8')
     lexer = JavaLexer(stream)
     token_stream = CommonTokenStream(lexer)
     parser = JavaParser(token_stream)
     tree = parser.compilationUnit()
     my_listener = MergePackageRecognizerListener(
-        common_token_stream=token_stream, p1 = r'./input2.java'  , p2 = r'./input.java'
+        common_token_stream=token_stream, p1 = 'p1'  , p2 = 'p2'
     )
 
     walker = ParseTreeWalker()
@@ -43,5 +44,9 @@ if __name__ == '__main__':
     argparser.add_argument(
         '-n', '--file',
         help='Input source', default=r'input.java')
+    argparser.add_argument(
+        '-n2', '--file2',
+        help='Input source', default=r'input2.java')
     args = argparser.parse_args()
     main(args)
+
