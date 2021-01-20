@@ -22,29 +22,6 @@ class MergePackageRecognizerListener(JavaParserLabeledListener):
     field addresses the field of the class, tobe encapsulated.
     """
 
-    def mergefolders(self, p1 = "input.java", p2 = "input2.java"):
-        # Python program to
-        # demonstrate merging
-        # of two files
-
-        data = data2 = None
-
-        # Reading data from file1
-        with open(self.p1) as fp:
-            data = fp.read()
-
-            # Reading data from file2
-        with open(self.p2) as fp:
-            data2 = fp.read()
-
-        # Merging 2 files
-        # To add the data of file2
-        # from next line
-        data += "\n"
-        data += data2
-
-        with open('p3', 'w') as fp:
-            fp.write(data)
 
     def enterPackageDeclaration(self, ctx: JavaParserLabeled.PackageDeclarationContext):
         package_name = ctx.getText().split("package")[1].replace(';', '')
@@ -57,13 +34,12 @@ class MergePackageRecognizerListener(JavaParserLabeledListener):
             #                                         stop= ctx.stop.tokenIndex,
             #                                         program_name=self.token_stream_rewriter.DEFAULT_PROGRAM_NAME)
             print(package_name)
-
     def enterImportDeclaration(self, ctx: JavaParserLabeled.ImportDeclarationContext):
         import_name = ctx.getText().split("import")[1].replace(';', '')
         if import_name == 'p1' or import_name == 'p2':
             self.token_stream_rewriter.replaceRange(from_idx=ctx.start.tokenIndex,
                                                     to_idx=ctx.stop.tokenIndex,
-                                                    text='p3')
+                                                    text='import p3;')
             print(import_name)
 
 
