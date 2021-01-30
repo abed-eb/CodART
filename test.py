@@ -23,31 +23,21 @@ from gen.java.JavaLexer import JavaLexer
 from gen.java.JavaParser import JavaParser
 
 
-def mergefolders(p1=None, p2=None):
-    # Python program to
-    # demonstrate merging
-    # of two files
+def main(args):
 
-    data = data2 = None
+    stream = FileStream(args.file, encoding='utf8')
+    lexer = JavaLexer(stream)
+    token_stream = CommonTokenStream(lexer)
+    parser = JavaParser(token_stream)
+    tree = parser.compilationUnit()
+    my_listener = MergePackageRecognizerListener(
+        common_token_stream=token_stream, p1 = 'p1'  , p2 = 'p2'
+    )
 
-    # Reading data from file1
-    with open(p1) as fp:
-        data = fp.read()
+    walker = ParseTreeWalker()
+    walker.walk(t=tree, listener=my_listener)
 
-        # Reading data from file2
-    with open(p2) as fp:
-        data2 = fp.read()
-
-    # Merging 2 files
-    # To add the data of file2
-    # from next line
-    data += "\n"
-    data += data2
-
-    with open('p3.java', 'w') as fp:
-        fp.write(data)
-
-
+<<<<<<< HEAD
 def main(args):
     # i = 0
     # while i < 4 :
@@ -97,6 +87,10 @@ def main(args):
         #                 output_file.write(each_line)
         #                 lines_seen.add(each_line)
         #     i = i+1
+=======
+    with open('input.refactored.java', mode='w', newline='') as f:
+        f.write(my_listener.token_stream_rewriter.getDefaultText())
+>>>>>>> parent of 4f93d9d... complete merge without a real project input
 
 
 if __name__ == '__main__':
