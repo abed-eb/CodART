@@ -30,7 +30,7 @@ def mergefolders(source_dir=None, target_dir=None):
     for file_name in file_names:
         shutil.move(os.path.join(source_dir, file_name), target_dir)
     os.chdir(r"D:\frontEnd\CodART")
-    os.rename("pk2", "pk3")
+    os.rename("pk2", "pk2")
     # Python program to
     # demonstrate merging
     # of two files
@@ -108,8 +108,11 @@ def main(args, bool):
         #     i = i+1
 
 if __name__ == '__main__':
-    file_names = os.listdir("pk1")
-    file_names2 = os.listdir("pk2")
+    package1 = input("Please enter address of package 1: ")
+    package2 = input("Please enter address of package 2: ")
+    srcAddress = input("Please enter address of package 2: ")
+    file_names = os.listdir(package1)
+    file_names2 = os.listdir(package2)
     file_names3 = os.listdir("pk4")
     i=0
     j=0
@@ -118,14 +121,14 @@ if __name__ == '__main__':
     while i < len(file_names):
         argparser.add_argument(
             '-n', '--file',
-            help='Input source', default=r'pk1/' + file_names[i])
+            help='Input source', default=r'' + package1 + '/' + file_names[i])
         args = argparser.parse_args()
         i = i+1
         main(args, 1)
     while j < len(file_names2):
         argparser.add_argument(
             '-n2', '--file2',
-            help='Input source', default=r'pk2/' + file_names2[j])
+            help='Input source', default=r'' + package2 + '/' + file_names2[j])
         args = argparser.parse_args()
         j = j+1
         main(args, 0)
