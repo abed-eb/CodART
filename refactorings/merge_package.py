@@ -26,10 +26,10 @@ class MergePackageRecognizerListener(JavaParserLabeledListener):
 
     def enterPackageDeclaration(self, ctx: JavaParserLabeled.PackageDeclarationContext):
         package_name = ctx.getText().split("package")[1].replace(';', '')
-        if package_name == self.p1 or package_name == self.p2:
+        if package_name == self.pk1 or package_name == self.pk2:
             self.token_stream_rewriter.replaceRange(from_idx=ctx.start.tokenIndex,
                                                     to_idx=ctx.stop.tokenIndex,
-                                                    text='package p3;')
+                                                    text='package pk3;')
             # x = self.token_stream_rewriter.getText(start= ctx.start.tokenIndex,
             #                                         stop= ctx.stop.tokenIndex,
             #                                         program_name=self.token_stream_rewriter.DEFAULT_PROGRAM_NAME)
@@ -37,23 +37,23 @@ class MergePackageRecognizerListener(JavaParserLabeledListener):
 
     def enterImportDeclaration(self, ctx: JavaParserLabeled.ImportDeclarationContext):
         import_name = ctx.getText().split("import")[1].replace(';', '')
-        if import_name == 'p1' or import_name == 'p2':
+        if import_name == 'pk1' or import_name == 'pk2':
             self.token_stream_rewriter.replaceRange(from_idx=ctx.start.tokenIndex,
                                                     to_idx=ctx.stop.tokenIndex,
-                                                    text='import p3;')
+                                                    text='import pk3;')
             print(import_name)
 
 
     def __init__(self, common_token_stream: CommonTokenStream = None,
-                 p1 : str = None,
-                 p2 : str = None,):
+                 pk1 : str = None,
+                 pk2 : str = None,):
         """
         :param common_token_stream:
         """
         self.token_stream = common_token_stream
-        self.p1 = p1
-        self.p2 = p2
-        self.p3 = None
+        self.pk1 = pk1
+        self.pk2 = pk2
+        self.pk3 = None
         # Move all the tokens in the source code in a buffer, token_stream_rewriter.
         if common_token_stream is not None:
             self.token_stream_rewriter = TokenStreamRewriter(common_token_stream)
