@@ -38,6 +38,7 @@ def main(args):
     walker.walk(t=tree, listener=my_listener)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 def main(args):
     # i = 0
     # while i < 4 :
@@ -87,6 +88,10 @@ def main(args):
         #                 output_file.write(each_line)
         #                 lines_seen.add(each_line)
         #     i = i+1
+=======
+    with open('input.refactored.java', mode='w', newline='') as f:
+        f.write(my_listener.token_stream_rewriter.getDefaultText())
+>>>>>>> parent of 4f93d9d... complete merge without a real project input
 =======
     with open('input.refactored.java', mode='w', newline='') as f:
         f.write(my_listener.token_stream_rewriter.getDefaultText())
