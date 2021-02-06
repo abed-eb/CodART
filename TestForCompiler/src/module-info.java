@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author abed
+ *
+ */
+module TestForCompiler {
+}

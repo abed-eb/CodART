@@ -29,7 +29,7 @@ class MergePackageRecognizerListener(JavaParserLabeledListener):
         if package_name == self.pk1 or package_name == self.pk2:
             self.token_stream_rewriter.replaceRange(from_idx=ctx.start.tokenIndex,
                                                     to_idx=ctx.stop.tokenIndex,
-                                                    text='package pk3;')
+                                                    text='package result;')
             # x = self.token_stream_rewriter.getText(start= ctx.start.tokenIndex,
             #                                         stop= ctx.stop.tokenIndex,
             #                                         program_name=self.token_stream_rewriter.DEFAULT_PROGRAM_NAME)
@@ -37,10 +37,10 @@ class MergePackageRecognizerListener(JavaParserLabeledListener):
 
     def enterImportDeclaration(self, ctx: JavaParserLabeled.ImportDeclarationContext):
         import_name = ctx.getText().split("import")[1].replace(';', '')
-        if import_name == 'pk1' or import_name == 'pk2':
+        if import_name == self.pk1 or import_name == self.pk2:
             self.token_stream_rewriter.replaceRange(from_idx=ctx.start.tokenIndex,
                                                     to_idx=ctx.stop.tokenIndex,
-                                                    text='import pk3;')
+                                                    text='import result.*;')
             print(import_name)
 
 
