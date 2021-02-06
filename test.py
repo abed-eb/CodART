@@ -30,7 +30,7 @@ def mergefolders(source_dir=None, target_dir=None):
     for file_name in file_names:
         shutil.move(os.path.join(source_dir, file_name), target_dir)
     os.chdir(r"D:\frontEnd\CodART")
-    os.renames("TestForCompiler/src/pk2", "TestForCompiler/src/pk3")
+    os.renames("TestForCompiler/src/pk2", "TestForCompiler/src/pk2")
     # Python program to
     # demonstrate merging
     # of two files
@@ -150,11 +150,11 @@ if __name__ == '__main__':
     while k < len(file_names3):
         print("hi")
         fileNames = os.listdir("TestForCompiler/src/" + file_names3[k])
-        packageName = file_names3[k]
+
         for file in fileNames:
             argparser = argparse.ArgumentParser()
             argparser.add_argument(
-                '-n3', '--file3',  help='Input source', default=r'TestForCompiler/src/' + packageName + "/" + file)
+                '-n3', '--file3',  help='Input source', default=r'TestForCompiler/src/' + file_names3[k] + "/" + file)
             args = argparser.parse_args()
             main(args, bool=2, p1="pk1", p2="pk2")
         k = k+1

@@ -1,6 +1,6 @@
 package pk4;
 import pk1.*;
-class B
+class D
 {
 //this is my class
 }

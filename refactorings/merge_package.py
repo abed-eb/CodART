@@ -30,9 +30,6 @@ class MergePackageRecognizerListener(JavaParserLabeledListener):
             self.token_stream_rewriter.replaceRange(from_idx=ctx.start.tokenIndex,
                                                     to_idx=ctx.stop.tokenIndex,
                                                     text='package result;')
-            # x = self.token_stream_rewriter.getText(start= ctx.start.tokenIndex,
-            #                                         stop= ctx.stop.tokenIndex,
-            #                                         program_name=self.token_stream_rewriter.DEFAULT_PROGRAM_NAME)
             print(package_name)
 
     def enterImportDeclaration(self, ctx: JavaParserLabeled.ImportDeclarationContext):
