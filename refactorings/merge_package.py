@@ -37,7 +37,7 @@ class MergePackageRecognizerListener(JavaParserLabeledListener):
 
     def enterImportDeclaration(self, ctx: JavaParserLabeled.ImportDeclarationContext):
         import_name = ctx.getText().split("import")[1].replace(';', '')
-        if import_name == self.pk1 or import_name == self.pk2:
+        if import_name == self.pk1 + ".*" or import_name == self.pk2 + ".*":
             self.token_stream_rewriter.replaceRange(from_idx=ctx.start.tokenIndex,
                                                     to_idx=ctx.stop.tokenIndex,
                                                     text='import result.*;')

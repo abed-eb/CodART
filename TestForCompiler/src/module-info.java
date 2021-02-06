@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author abed
- *
- */
-module TestForCompiler {
-}
