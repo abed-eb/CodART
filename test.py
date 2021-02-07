@@ -48,7 +48,7 @@ def mergefolders(source_dir=None, target_dir=None):
     #     fp.write(data)
 
 
-def main(args, bool, p1, p2, counter):
+def main(args, bool, p1, p2):
     if bool == 1:
         print(args)
         print("welcome to the main")
@@ -69,7 +69,7 @@ def main(args, bool, p1, p2, counter):
         walker = ParseTreeWalker()
         walker.walk(t=tree, listener=my_listener)
 
-        with open('TestForCompiler/src/' + p1 + "/" + "input" + str(counter) + ".java", mode='w', newline='') as f:
+        with open('TestForCompiler/src/' + p1 + "/" + "input.java", mode='w', newline='') as f:
             f.write(my_listener.token_stream_rewriter.getDefaultText())
         # shutil.move(os.path.join('CodART', fileName), os.path.join(srcFolder + p1, fileName))
         # os.remove(srcFolder + fileName)
@@ -88,7 +88,7 @@ def main(args, bool, p1, p2, counter):
         walker = ParseTreeWalker()
         walker.walk(t=tree, listener=my_listener)
 
-        with open('TestForCompiler/src/' + p2 + "/" + "input" + str(counter) + ".java", mode='w', newline='') as f:
+        with open('TestForCompiler/src/' + p2 + "/" + "input2.java", mode='w', newline='') as f:
             f.write(my_listener.token_stream_rewriter.getDefaultText())
         # shutil.move(os.path.join('CodART', fileName), os.path.join(srcFolder + p2, fileName))
         # os.remove(srcFolder + fileName)
@@ -106,7 +106,7 @@ def main(args, bool, p1, p2, counter):
 
         walker = ParseTreeWalker()
         walker.walk(t=tree, listener=my_listener)
-        with open('TestForCompiler/src/pk4/' + "input" + str(counter) + ".java", mode='w', newline='') as f:
+        with open('TestForCompiler/src/pk4/' + "input4.java", mode='w', newline='') as f:
             f.write(my_listener.token_stream_rewriter.getDefaultText())
         mergefolders('TestForCompiler/src/' + p1, 'TestForCompiler/src/' + p2)
         # else:
@@ -131,14 +131,14 @@ if __name__ == '__main__':
     i = 0
     j = 0
     k = 0
-    l = 0
+
     while i < len(file_names):
         argparser = argparse.ArgumentParser()
         argparser.add_argument(
             '-n', '--file',  help='Input source', default=r'TestForCompiler/src/' + package1 + "/" + file_names[i])
         args = argparser.parse_args()
         i = i+1
-        main(args, bool=1, p1="pk1", p2="pk2", counter=i)
+        main(args, bool=1, p1="pk1", p2="pk2")
     while j < len(file_names2):
         print("hi1")
         argparser = argparse.ArgumentParser()
@@ -146,7 +146,7 @@ if __name__ == '__main__':
             '-n2', '--file2',  help='Input source', default=r'TestForCompiler/src/' + package2 + "/" + file_names2[j])
         args = argparser.parse_args()
         j = j+1
-        main(args, bool=0, p1="pk1", p2="pk2", counter=j)
+        main(args, bool=0, p1="pk1", p2="pk2")
     while k < len(file_names3):
         print("hi")
         fileNames = os.listdir("TestForCompiler/src/" + file_names3[k])
@@ -156,7 +156,6 @@ if __name__ == '__main__':
             argparser.add_argument(
                 '-n3', '--file3',  help='Input source', default=r'TestForCompiler/src/' + file_names3[k] + "/" + file)
             args = argparser.parse_args()
-            main(args, bool=2, p1="pk1", p2="pk2", counter=l)
-            l = l + 1
+            main(args, bool=2, p1="pk1", p2="pk2")
         k = k+1
 
